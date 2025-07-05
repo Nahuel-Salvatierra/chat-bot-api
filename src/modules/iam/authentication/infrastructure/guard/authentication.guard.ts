@@ -34,14 +34,14 @@ export class AuthenticationGuard implements CanActivate {
     let error = new UnauthorizedException();
 
     for (const guard of guards) {
-      const canActivate = await Promise.resolve(
-        guard.canActivate(context),
-      ).catch((err) => {
-        error = err;
-      });
+      try {
+        const canActivate = await guard.canActivate(context);
 
-      if (canActivate) {
-        return true;
+        if (canActivate) {
+          return true;
+        }
+      } catch (err) {
+        error = err;
       }
     }
 
