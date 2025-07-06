@@ -6,7 +6,6 @@ import * as admin from 'firebase-admin';
 export class AccessTokenGuard extends AuthGuard('firebase') {
   async canActivate(context: any): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-
     try {
       const booleanResult = await admin
         .auth()
