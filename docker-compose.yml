@@ -1,0 +1,11 @@
+services:
+  api:
+    container_name: chat-ai-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '2121:2121'
+    env_file:
+      - .env
+    restart: unless-stopped
