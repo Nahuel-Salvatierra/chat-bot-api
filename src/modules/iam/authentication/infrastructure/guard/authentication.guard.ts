@@ -36,7 +36,6 @@ export class AuthenticationGuard implements CanActivate {
     for (const guard of guards) {
       try {
         const canActivate = await guard.canActivate(context);
-
         if (canActivate) {
           return true;
         }

@@ -19,6 +19,7 @@ export class FirebaseStrategy extends PassportStrategy(Strategy, 'firebase') {
           clientEmail: firebaseConfig.clientEmail,
           privateKey: firebaseConfig.privateKey,
         }),
+        databaseURL: firebaseConfig.databaseURL,
       });
     }
 
@@ -31,7 +32,7 @@ export class FirebaseStrategy extends PassportStrategy(Strategy, 'firebase') {
     super(options);
   }
 
-  async validate(req: any, payload: any): Promise<CurrentUserDto> {
+  async validate(req: Request): Promise<CurrentUserDto> {
     try {
       const token = ExtractJwt.fromAuthHeaderAsBearerToken()(req);
 
