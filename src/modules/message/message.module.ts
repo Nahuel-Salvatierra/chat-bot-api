@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 import { MESSAGE_REPOSITORY_KEY } from './application/repository/message.repository.interface';
+import { createAiService } from './application/service/ai-service.factory';
 import { IA_SERVICE_KEY } from './application/service/ai.service.interface';
 import { MessageService } from './application/service/message.service';
-import { OpenAiService } from './application/service/openapi.service';
 import { FirebaseMessageRepository } from './infrastructure/persistence/firebase-message.repository';
 import { MessageController } from './interface/message.controller';
 
@@ -16,7 +17,9 @@ import { MessageController } from './interface/message.controller';
     },
     {
       provide: IA_SERVICE_KEY,
-      useClass: OpenAiService,
+      useFactory: (configService: ConfigService) =>
+        createAiService(configService),
+      inject: [ConfigService],
     },
     MessageService,
   ],
