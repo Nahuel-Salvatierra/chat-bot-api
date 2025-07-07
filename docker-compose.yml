@@ -1,6 +1,6 @@
 services:
   api:
-    container_name: chat-ai-api
+    container_name: chat-ai
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,3 +9,10 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    external: true
+    name: shared-network-production
