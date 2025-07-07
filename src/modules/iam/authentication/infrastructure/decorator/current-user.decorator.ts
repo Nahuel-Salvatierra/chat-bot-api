@@ -1,7 +1,7 @@
 import { ExecutionContext, createParamDecorator } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 
-import { CurrentUserDto } from '../../domain/currentUser.dto';
+import { CurrentUserDto } from '../../domain/current-user.dto';
 
 export const CurrentUser = createParamDecorator(
   async (field: keyof CurrentUserDto, ctx: ExecutionContext) => {

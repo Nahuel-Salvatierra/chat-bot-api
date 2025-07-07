@@ -5,7 +5,7 @@ import * as admin from 'firebase-admin';
 import { Strategy } from 'passport-jwt';
 import { ExtractJwt } from 'passport-jwt';
 
-import { CurrentUserDto } from '../../domain/currentUser.dto';
+import { CurrentUserDto } from '../../domain/current-user.dto';
 
 @Injectable()
 export class FirebaseStrategy extends PassportStrategy(Strategy, 'firebase') {
