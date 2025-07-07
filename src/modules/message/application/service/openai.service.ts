@@ -22,8 +22,6 @@ export class OpenAiService implements AiService {
         'You are a helpful assistant that can answer questions and help with tasks.',
     });
 
-    console.log(response);
-
     return { message: response.output_text };
   }
 }

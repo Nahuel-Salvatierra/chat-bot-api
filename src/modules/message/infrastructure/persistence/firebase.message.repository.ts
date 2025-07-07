@@ -32,7 +32,7 @@ export class FirebaseMessageRepository implements MessageRepository {
       content: message.content,
       role: message.role,
       userId: message.userId,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      createdAt: new Date(),
     };
 
     const filteredData = Object.fromEntries(
@@ -55,7 +55,6 @@ export class FirebaseMessageRepository implements MessageRepository {
     const limit = 10;
     const offset = 0;
     if (!userId) {
-      console.log('userId is undefined, returning empty array');
       return [];
     }
 
