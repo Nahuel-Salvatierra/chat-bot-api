@@ -23,8 +23,6 @@ export class MessageService {
   }
 
   async createMessage(dto: CreateMessageDto, userId: string): Promise<Message> {
-    console.log(userId);
-
     try {
       const messageDomain = MessageMapper.toUserMessageDomain(dto, userId);
       const userMessage = await this.messageRepository.create(messageDomain);
