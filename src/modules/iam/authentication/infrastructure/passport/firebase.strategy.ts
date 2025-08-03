@@ -12,12 +12,18 @@ export class FirebaseStrategy extends PassportStrategy(Strategy, 'firebase') {
   constructor(private readonly configService: ConfigService) {
     const firebaseConfig = configService.get('firebase');
 
+    const rawKey = firebaseConfig.privateKey?.replace(/\\n/g, '\n').trim();
+
+    const wrappedKey = rawKey?.includes('BEGIN PRIVATE KEY')
+      ? rawKey
+      : `-----BEGIN PRIVATE KEY-----\n${rawKey}\n-----END PRIVATE KEY-----`;
+
     if (!admin.apps.length) {
       admin.initializeApp({
         credential: admin.credential.cert({
           projectId: firebaseConfig.projectId,
           clientEmail: firebaseConfig.clientEmail,
-          privateKey: firebaseConfig.privateKey,
+          privateKey: wrappedKey,
         }),
         databaseURL: firebaseConfig.databaseURL,
       });
